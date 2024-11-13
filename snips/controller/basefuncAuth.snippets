@@ -1,0 +1,9 @@
+snippet basefuncRequireAuth "Require Auth Method for Controller"
+protected function requireAuth(): void {
+  if (!isset($_SESSION['user_id'])) {
+    $_SESSION['error'] = 'ログインが必要です。';
+    $this->redirect('/login');
+  }
+}
+endsnippet
+

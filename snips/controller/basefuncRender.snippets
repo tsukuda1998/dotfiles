@@ -1,0 +1,20 @@
+snippet basefuncRender "Render Method for Controller"
+protected function render(string $view, array $data = []): void {
+
+}
+endsnippet
+
+snippet sessMsg "Extract flashmessage from session"
+  if (isset($_SESSION['message'])) {
+    $data['message'] = $_SESSION['message'];
+    unset($_SESSION['message']);
+  }
+  if (isset($_SESSION['error'])) {
+    $data['error'] = $_SESSION['error'];
+    unset($_SESSION['error']);
+  }
+
+  extract($data);
+  include __DIR__ . '/../../resources/views/' . $view . '.php';
+endsnippet
+
