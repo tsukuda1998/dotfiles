@@ -1,0 +1,14 @@
+snippet ctl_sessMsg "Extract Flashmessage from Session"
+if (isset($_SESSION['message'])) {
+    $data['message'] = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['error'])) {
+    $data['error'] = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
+extract($data);
+include __DIR__ . '/../../resources/views/' . $view . '.php';
+endsnippet
+

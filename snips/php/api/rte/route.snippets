@@ -1,0 +1,6 @@
+snippet a-rte_route "API Route Definition"
+if (\$requestUri === '${1:/endpoint}' && \$requestMethod === '${2:GET}') {
+    \$controller = new ${3:Controller}();
+    \$controller->${4:method}();
+}
+endsnippet

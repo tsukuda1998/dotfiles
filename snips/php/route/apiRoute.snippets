@@ -1,0 +1,7 @@
+snippet api_route "API Route Definition"
+if ($requestUri === '${1:/endpoint}' && $requestMethod === '${2:GET}') {
+    $controller = new App\Controllers\\${3:ControllerName}();
+    $controller->${4:method}(${5});
+}
+endsnippet
+

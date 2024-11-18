@@ -1,0 +1,8 @@
+snippet modelfunc "Base Method for Model"
+public function ${1:method}(int $id): ${2:returnType} {
+  $stmt = $this->db->prepare("${3:SQL Query}");
+  $stmt->execute(${4:params});
+  return ${5:result};
+}
+endsnippet
+

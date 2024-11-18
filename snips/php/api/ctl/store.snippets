@@ -1,0 +1,8 @@
+snippet a-ctl_store "Store Method for Controller"
+public function store()
+{
+    \$data = json_decode(file_get_contents('php://input'), true);
+    ${1:Model}::create(\$data);
+    echo json_encode(['success' => true]);
+}
+endsnippet

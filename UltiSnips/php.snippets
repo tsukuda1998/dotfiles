@@ -1,0 +1,381 @@
+snippet modelfunc "Base Method for Model"
+public function ${1:method}(int $id): ${2:returnType} {
+  $stmt = $this->db->prepare("${3:SQL Query}");
+  $stmt->execute(${4:params});
+  return ${5:result};
+}
+endsnippet
+
+snippet delete "Delete Method for Model"
+public function delete(int $id): bool {
+  $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id = :id");
+  return $stmt->execute(['id' => $id]);
+}
+endsnippet
+
+snippet mdl_updateOrCreate "Update or Create Method"
+public static function updateOrCreate(array $conditions, array $data)
+{
+    $pdo = self::getDbConnection();
+    $stmt = $pdo->prepare("SELECT * FROM ${1:table} WHERE ${2:conditions}");
+    $stmt->execute($conditions);
+    $existing = $stmt->fetch();
+
+    if ($existing) {
+        // Update existing
+        self::update($existing['id'], $data);
+    } else {
+        // Create new
+        self::create($data);
+    }
+}
+endsnippet
+snippet pdo_query_find "Fetch a Single Record"
+public static function find(int $id): array | false
+{
+    $pdo = self::getDbConnection();
+    $stmt = $pdo->prepare("SELECT * FROM ${1:table_name} WHERE id = :id");
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+endsnippet
+
+snippet pdo_connection "PDO Connection Setup"
+private static function getDbConnection(): PDO
+{
+    $config = require __DIR__ . '/../../config/database.php';
+    $pdo = new PDO($config['dsn'], $config['username'], $config['password']);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $pdo;
+}
+endsnippet
+
+snippet mdl_find "Find Method for Model"
+public function find(int $id): array | false {
+  $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+  $stmt->execute(['id' => $id]);
+  return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+endsnippet
+
+snippet mdl_validate "Validate Data"
+public static function validate(array $data): bool
+{
+    ${1:// Add validation logic}
+    return ${2:true};
+}
+endsnippet
+snippet findAll "Find All Method for Model"
+public function findAll(): array {
+  $stmt = $this->db->prepare("SELECT * FROM {$this->table}");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+endsnippet
+
+snippet cfg_pdo "Standalone PDO Database Connection"
+<?php
+$host = '${1:localhost}';
+$db   = '${2:}';
+$user = '${3:}';
+$pass = '${4:}';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+}
+?>
+endsnippet
+snippet pdo_dev "PDO Database Connection (Development)" b
+<?php
+
+$host = getenv('DB_HOST') ?: 'localhost';
+$db   = getenv('DB_DATABASE') ?: 'dev_database';
+$user = getenv('DB_USERNAME') ?: 'dev_user';
+$pass = getenv('DB_PASSWORD') ?: '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+    echo "開発用DB接続成功";
+} catch (\PDOException $e) {
+    echo "接続エラー: " . $e->getMessage();
+}
+?>
+endsnippet
+
+snippet rte_group "Route Group"
+if (strpos($requestUri, '${1:/group}') === 0) {
+    // Define grouped routes
+    if ($requestUri === '${1:/group}/${2:subroute}' && $requestMethod === '${3:GET}') {
+        $controller = new ${4:Controller}();
+        $controller->${5:method}();
+    }
+}
+endsnippet
+snippet api_route "API Route Definition"
+if ($requestUri === '${1:/endpoint}' && $requestMethod === '${2:GET}') {
+    $controller = new App\Controllers\\${3:ControllerName}();
+    $controller->${4:method}(${5});
+}
+endsnippet
+
+snippet rte_middleware "Route with Middleware"
+if (${1:condition}) {
+    $middleware = new ${2:Middleware}();
+    $middleware->handle($request, function ($request) use (${3:controller}) {
+        $controller = new ${3:controller}();
+        $controller->${4:method}();
+    });
+}
+endsnippet
+snippet cmn_log "Log to File"
+file_put_contents('${1:logfile.log}', '[' . date('Y-m-d H:i:s') . "] ${2:message}\n", FILE_APPEND);
+endsnippet
+snippet cmn_errorHandling "Error Handling"
+try {
+    ${1:// Code that may throw exception}
+} catch (${2:Exception} $e) {
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()]);
+}
+endsnippet
+snippet a-ctl_index "Index Method for Controller"
+public function index()
+{
+    \$items = ${1:Model}::findAll();
+    echo json_encode(\$items);
+}
+endsnippet
+snippet a-ctl_store "Store Method for Controller"
+public function store()
+{
+    \$data = json_decode(file_get_contents('php://input'), true);
+    ${1:Model}::create(\$data);
+    echo json_encode(['success' => true]);
+}
+endsnippet
+snippet a-utl_log "Log to File"
+file_put_contents('${1:logfile.log}', '[' . date('Y-m-d H:i:s') . "] ${2:message}\n", FILE_APPEND);
+endsnippet
+snippet a-utl_error "Error Handling"
+try {
+    ${1:// Code that may throw exception}
+} catch (Exception \$e) {
+    http_response_code(500);
+    echo json_encode(['error' => \$e->getMessage()]);
+}
+endsnippet
+snippet a-rte_group "Route Group"
+if (strpos(\$requestUri, '${1:/group}') === 0) {
+    if (\$requestUri === '${1:/group}/${2:subroute}' && \$requestMethod === '${3:GET}') {
+        \$controller = new ${4:Controller}();
+        \$controller->${5:method}();
+    }
+}
+endsnippet
+snippet a-rte_route "API Route Definition"
+if (\$requestUri === '${1:/endpoint}' && \$requestMethod === '${2:GET}') {
+    \$controller = new ${3:Controller}();
+    \$controller->${4:method}();
+}
+endsnippet
+snippet a-cfg_pdo "PDO Database Connection"
+<?php
+\$host = getenv('DB_HOST') ?: '127.0.0.1';
+\$db   = getenv('DB_DATABASE') ?: 'api_db';
+\$user = getenv('DB_USERNAME') ?: 'root';
+\$pass = getenv('DB_PASSWORD') ?: '';
+\$charset = 'utf8mb4';
+
+\$dsn = "mysql:host=\$host;dbname=\$db;charset=\$charset";
+\$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    \$pdo = new PDO(\$dsn, \$user, \$pass, \$options);
+} catch (\PDOException \$e) {
+    throw new \PDOException(\$e->getMessage(), (int)\$e->getCode());
+}
+?>
+endsnippet
+snippet a-mdl_update "Update Method for Model"
+public static function update(int \$id, array \$data)
+{
+    \$pdo = self::getDbConnection();
+    \$columns = implode(", ", array_map(fn(\$key) => "\$key = :\$key", array_keys(\$data)));
+    \$stmt = \$pdo->prepare("UPDATE ${1:table} SET \$columns WHERE id = :id");
+    \$stmt->execute(array_merge(\$data, ['id' => \$id]));
+    return \$stmt->rowCount() > 0;
+}
+endsnippet
+snippet a-mdl_create "Create Method for Model"
+public static function create(array \$data)
+{
+    \$pdo = self::getDbConnection();
+    \$stmt = \$pdo->prepare("INSERT INTO ${1:table} (${2:columns}) VALUES (${3:placeholders})");
+    \$stmt->execute(\$data);
+    return ['id' => \$pdo->lastInsertId()] + \$data;
+}
+endsnippet
+extends html
+
+
+snippet inc "Include a PHP file" b
+<?php
+require_once __DIR__ . '${1:}';
+?>
+endsnippet
+
+
+snippet ctl_destroy "Destroy Method for Controller"
+public function destroy(int $id)
+{
+    if (${1:Model}::delete($id)) {
+        echo json_encode(['success' => true, 'message' => 'Deleted successfully.']);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'Resource not found.']);
+    }
+}
+endsnippet
+
+snippet ctl_index "Index Method for Controller"
+public function index()
+{
+    $items = ${1:Model}::findAll();
+    echo json_encode($items);
+}
+endsnippet
+
+snippet ctl_show "Show Method for Controller"
+public function show(int $id)
+{
+    $item = ${1:Model}::find($id);
+    if ($item) {
+        echo json_encode($item);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'Resource not found.']);
+    }
+}
+endsnippet
+
+snippet ctl_middleware "Middleware Logic"
+public function middleware(${1:Request $request}, callable $next)
+{
+    // Pre-process logic
+    ${2:// Your logic here}
+    
+    // Pass to next
+    return $next($request);
+}
+endsnippet
+snippet ctl_sessMsg "Extract Flashmessage from Session"
+if (isset($_SESSION['message'])) {
+    $data['message'] = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['error'])) {
+    $data['error'] = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
+extract($data);
+include __DIR__ . '/../../resources/views/' . $view . '.php';
+endsnippet
+
+snippet ctl_update "Update Method for Controller"
+public function update(int $id)
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    $updated = ${1:Model}::update($id, $data);
+    echo json_encode(['success' => $updated]);
+}
+endsnippet
+
+snippet ctl_render "Render Method for Controller"
+protected function render(string $view, array $data = []): void {
+
+}
+endsnippet
+
+snippet sessMsg "Extract flashmessage from session"
+  if (isset($_SESSION['message'])) {
+    $data['message'] = $_SESSION['message'];
+    unset($_SESSION['message']);
+  }
+  if (isset($_SESSION['error'])) {
+    $data['error'] = $_SESSION['error'];
+    unset($_SESSION['error']);
+  }
+
+  extract($data);
+  include __DIR__ . '/../../resources/views/' . $view . '.php';
+endsnippet
+
+snippet ctl_req_auth "Require Auth Method for Controller"
+protected function requireAuth(): void {
+  if (!isset($_SESSION['user_id'])) {
+    $_SESSION['error'] = 'ログインが必要です。';
+    $this->redirect('/login');
+  }
+}
+endsnippet
+
+snippet ctl_filter "Filter Data"
+public function filter(array $data): array
+{
+    return array_filter($data, function (${1:item}) {
+        return ${2:condition};
+    });
+}
+endsnippet
+snippet ctl_response "Return JSON Response"
+http_response_code(${1:200});
+echo json_encode(${2:['message' => 'Success']});
+endsnippet
+
+snippet ctl_redirect "Redirect Method for Controller"
+protected function redirect(string $url): void {
+  header("Location: " . htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
+  exit;
+}
+endsnippet
+
+snippet ctl_method "Controller Method"
+public function ${1:methodName}(${2:Request $request}): ${3:Response}
+{
+    ${4:}
+    return response()->json(${5:[]});
+}
+endsnippet
+
+snippet ctl_store "Store Method for Controller"
+public function store()
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    ${1:Model}::create($data);
+    echo json_encode(['success' => true, 'data' => ${2:result}]);
+}
+endsnippet
+

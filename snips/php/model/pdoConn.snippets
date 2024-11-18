@@ -1,0 +1,10 @@
+snippet pdo_connection "PDO Connection Setup"
+private static function getDbConnection(): PDO
+{
+    $config = require __DIR__ . '/../../config/database.php';
+    $pdo = new PDO($config['dsn'], $config['username'], $config['password']);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $pdo;
+}
+endsnippet
+

@@ -1,0 +1,8 @@
+snippet ctl_filter "Filter Data"
+public function filter(array $data): array
+{
+    return array_filter($data, function (${1:item}) {
+        return ${2:condition};
+    });
+}
+endsnippet

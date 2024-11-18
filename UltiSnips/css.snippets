@@ -1,0 +1,137 @@
+snippet modal "Modal Component" b
+.${1:modal} {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.${1:modal}--${2:open} {
+  display: flex;
+}
+
+.${1:modal}__${3:content} {
+  background-color: ${4:#fff};
+  padding: ${5:1.250rem};
+  border-radius: ${6:0.500rem};
+  width: ${7:80%};
+  max-width: ${8:25.000rem};
+}
+endsnippet
+
+snippet button "Button Component" b
+.${1:button} {
+  display: inline-block;
+  padding: ${2:0.625rem} ${3:1.250rem};
+  border-radius: ${4:0.313rem};
+  background-color: ${5:#3498db};
+  color: ${6:#fff};
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: ${7:1.000rem};
+}
+
+.${1:button}--${8:primary} {
+  background-color: ${9:#2ecc71};
+}
+
+.${1:button}--${10:disabled} {
+  background-color: ${11:#95a5a6};
+  cursor: not-allowed;
+}
+endsnippet
+
+snippet grid "Grid Layout" b
+.${1:grid} {
+  display: grid;
+  grid-template-columns: repeat(${2:3}, 1fr);
+  grid-gap: ${3:0.625rem};
+}
+
+.${1:grid}__${4:item} {
+  background-color: ${5:#f4f4f4};
+  padding: ${6:0.625rem};
+  border: ${7:0.063rem solid #ccc};
+  border-radius: ${8:0.313rem};
+}
+endsnippet
+
+snippet block "BEM Block"
+.${1:block} {
+  ${0}
+}
+endsnippet
+
+snippet element "BEM Element"
+  
+.${1:block}__${2:element} {
+  ${0}
+}
+endsnippet
+
+
+snippet modifier "BEM modifier"
+  
+.${1:block}--${3:modifier} {
+  ${0}
+}
+endsnippet
+
+snippet card "Card Component" b
+.${1:card} {
+  border: ${2:0.063rem solid #ccc};
+  border-radius: ${3:0.625rem};
+  padding: ${4:1.250rem};
+  background-color: ${5:#fff};
+  box-shadow: ${6:0 0.125rem 0.313rem rgba(0, 0, 0, 0.1)};
+}
+
+.${1:card}__${7:title} {
+  font-size: ${8:1.125rem};
+  font-weight: bold;
+  margin-bottom: ${9:0.625rem};
+}
+
+.${1:card}__${10:description} {
+  font-size: ${11:0.875rem};
+  color: ${12:#666};
+}
+endsnippet
+
+snippet header "Header Component" b
+.${1:header} {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${2:0.625rem} ${3:1.250rem};
+  background-color: ${4:#2c3e50};
+  color: ${5:#fff};
+}
+
+.${1:header}__${6:logo} {
+  font-size: ${7:1.500rem};
+  font-weight: bold;
+}
+
+.${1:header}__${8:nav} {
+  display: flex;
+  gap: ${9:0.938rem};
+}
+
+.${1:header}__${10:nav-item} {
+  text-decoration: none;
+  color: ${11:#fff};
+}
+
+.${1:header}__${10:nav-item}--${12:active} {
+  font-weight: bold;
+  text-decoration: underline;
+}
+endsnippet
+

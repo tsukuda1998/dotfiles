@@ -1,0 +1,9 @@
+snippet ctl_update "Update Method for Controller"
+public function update(int $id)
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    $updated = ${1:Model}::update($id, $data);
+    echo json_encode(['success' => $updated]);
+}
+endsnippet
+

@@ -1,0 +1,10 @@
+snippet ctl_middleware "Middleware Logic"
+public function middleware(${1:Request $request}, callable $next)
+{
+    // Pre-process logic
+    ${2:// Your logic here}
+    
+    // Pass to next
+    return $next($request);
+}
+endsnippet

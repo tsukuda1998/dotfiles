@@ -1,4 +1,4 @@
-snippet basefuncFind "Find Method for Model"
+snippet mdl_find "Find Method for Model"
 public function find(int $id): array | false {
   $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
   $stmt->execute(['id' => $id]);

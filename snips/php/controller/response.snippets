@@ -1,0 +1,5 @@
+snippet ctl_response "Return JSON Response"
+http_response_code(${1:200});
+echo json_encode(${2:['message' => 'Success']});
+endsnippet
+

@@ -1,4 +1,12 @@
 {
-  "snippets.ultisnips.directories": ["UltiSnips", "/home/tsukuda/.config/nvim/snips"]
+  "snippets.ultisnips.directories": [
+    "UltiSnips"
+  ],
+  "snippets.ultisnips.enable": true,
+  "coc.preferences.snippetIndicator": "🐍",
+  "coc.preferences.jumpPlaceholder": "…",
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.source.ultisnips.enable": true,
+  "coc.source.ultisnips.priority": 90
 }
 

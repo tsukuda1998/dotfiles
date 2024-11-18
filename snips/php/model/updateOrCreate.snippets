@@ -1,0 +1,17 @@
+snippet mdl_updateOrCreate "Update or Create Method"
+public static function updateOrCreate(array $conditions, array $data)
+{
+    $pdo = self::getDbConnection();
+    $stmt = $pdo->prepare("SELECT * FROM ${1:table} WHERE ${2:conditions}");
+    $stmt->execute($conditions);
+    $existing = $stmt->fetch();
+
+    if ($existing) {
+        // Update existing
+        self::update($existing['id'], $data);
+    } else {
+        // Create new
+        self::create($data);
+    }
+}
+endsnippet

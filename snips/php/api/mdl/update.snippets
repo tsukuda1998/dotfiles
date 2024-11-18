@@ -1,0 +1,10 @@
+snippet a-mdl_update "Update Method for Model"
+public static function update(int \$id, array \$data)
+{
+    \$pdo = self::getDbConnection();
+    \$columns = implode(", ", array_map(fn(\$key) => "\$key = :\$key", array_keys(\$data)));
+    \$stmt = \$pdo->prepare("UPDATE ${1:table} SET \$columns WHERE id = :id");
+    \$stmt->execute(array_merge(\$data, ['id' => \$id]));
+    return \$stmt->rowCount() > 0;
+}
+endsnippet

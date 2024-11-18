@@ -8,26 +8,3 @@ require_once __DIR__ . '${1:}';
 endsnippet
 
 
-snippet pdo "PDO Database Connection" b
-<?php
-$host = '${1:localhost}';
-$db   = '${2:todo_app}';
-$user = '${3:your_db_username}';
-$pass = '${4:your_db_password}';
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
-?>
-endsnippet
-

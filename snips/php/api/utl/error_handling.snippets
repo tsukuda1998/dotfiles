@@ -1,0 +1,8 @@
+snippet a-utl_error "Error Handling"
+try {
+    ${1:// Code that may throw exception}
+} catch (Exception \$e) {
+    http_response_code(500);
+    echo json_encode(['error' => \$e->getMessage()]);
+}
+endsnippet

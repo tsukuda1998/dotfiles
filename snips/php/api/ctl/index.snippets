@@ -1,0 +1,7 @@
+snippet a-ctl_index "Index Method for Controller"
+public function index()
+{
+    \$items = ${1:Model}::findAll();
+    echo json_encode(\$items);
+}
+endsnippet

@@ -1,4 +1,4 @@
-snippet basefuncRequireAuth "Require Auth Method for Controller"
+snippet ctl_req_auth "Require Auth Method for Controller"
 protected function requireAuth(): void {
   if (!isset($_SESSION['user_id'])) {
     $_SESSION['error'] = 'ログインが必要です。';

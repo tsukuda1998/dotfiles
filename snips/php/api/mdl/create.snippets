@@ -1,0 +1,9 @@
+snippet a-mdl_create "Create Method for Model"
+public static function create(array \$data)
+{
+    \$pdo = self::getDbConnection();
+    \$stmt = \$pdo->prepare("INSERT INTO ${1:table} (${2:columns}) VALUES (${3:placeholders})");
+    \$stmt->execute(\$data);
+    return ['id' => \$pdo->lastInsertId()] + \$data;
+}
+endsnippet

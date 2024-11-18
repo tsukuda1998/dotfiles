@@ -1,4 +1,4 @@
-snippet basefuncFindAll "Find All Method for Model"
+snippet findAll "Find All Method for Model"
 public function findAll(): array {
   $stmt = $this->db->prepare("SELECT * FROM {$this->table}");
   $stmt->execute();

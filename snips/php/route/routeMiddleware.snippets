@@ -1,0 +1,9 @@
+snippet rte_middleware "Route with Middleware"
+if (${1:condition}) {
+    $middleware = new ${2:Middleware}();
+    $middleware->handle($request, function ($request) use (${3:controller}) {
+        $controller = new ${3:controller}();
+        $controller->${4:method}();
+    });
+}
+endsnippet

@@ -1,0 +1,8 @@
+snippet a-rte_group "Route Group"
+if (strpos(\$requestUri, '${1:/group}') === 0) {
+    if (\$requestUri === '${1:/group}/${2:subroute}' && \$requestMethod === '${3:GET}') {
+        \$controller = new ${4:Controller}();
+        \$controller->${5:method}();
+    }
+}
+endsnippet

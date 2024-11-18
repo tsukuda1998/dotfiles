@@ -1,4 +1,4 @@
-snippet basefuncDelete "Delete Method for Model"
+snippet delete "Delete Method for Model"
 public function delete(int $id): bool {
   $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id = :id");
   return $stmt->execute(['id' => $id]);
