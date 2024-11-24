@@ -12,6 +12,8 @@ Plug 'SirVer/ultisnips'
 
 call plug#end()
 
+command! E Explore
+
 set number
 set autoread
 set clipboard=unnamed
@@ -20,6 +22,11 @@ set shiftwidth=2
 set softtabstop=2
 set whichwrap=h,l,b,s,<,>,[,]
 set textwidth=0
+
+filetype plugin indent on
+set autoindent
+set smartindent
+
 
 nnoremap <Return><Return> <c-w><c-w>      
 highlight trailingWhitespace ctermbg=red guibg=red  
