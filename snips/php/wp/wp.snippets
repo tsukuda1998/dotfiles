@@ -1,0 +1,92 @@
+snippet wp_title "Get the title with custom separator"
+wp_title('|', true, 'right');
+endsnippet
+
+snippet bloginfo_name "Output the site name"
+bloginfo('name');
+endsnippet
+
+snippet get_template_directory_uri "Get the current theme's directory URI"
+get_template_directory_uri();
+endsnippet
+
+snippet wp_head "Insert wp_head hook"
+wp_head();
+endsnippet
+
+snippet home_url "Get the home URL"
+home_url();
+endsnippet
+
+snippet site_url "Get the site URL with a specific path"
+site_url('${1:/path}');
+endsnippet
+
+snippet get_header "Include the header template"
+get_header();
+endsnippet
+
+snippet have_posts "Check if there are posts"
+(have_posts()): while (have_posts()): the_post();
+${1:<!-- Your loop content here -->}
+<?php endwhile; else: ?>
+<p>${2}</p>
+<?php endif; ?>
+endsnippet
+
+snippet the_post "Move to the current post"
+the_post();
+endsnippet
+
+snippet the_title "Output the title of the current post"
+the_title();
+endsnippet
+
+snippet the_time "Output the formatted time of the post"
+the_time(get_option('date_format'));
+endsnippet
+
+snippet get_footer "Include the footer template"
+get_footer();
+endsnippet
+
+snippet wp_footer "Insert wp_footer hook"
+wp_footer();
+endsnippet
+
+snippet get_field "ACF: Retrieve a custom field value"
+get_field('${1:field_name}');
+endsnippet
+
+snippet the_field "ACF: Output a custom field value"
+the_field('${1:field_name}');
+endsnippet
+
+snippet have_rows "ACF: Check if repeater field has rows"
+have_rows('${1:field_name}');
+endsnippet
+
+snippet the_row "ACF: Iterate over the next row in a repeater field"
+the_row();
+endsnippet
+
+snippet get_sub_field "ACF: Retrieve a sub field value inside a repeater field"
+get_sub_field('${1:sub_field_name}');
+endsnippet
+
+snippet esc_url "Escape a URL for safe output"
+esc_url('${1:url}');
+endsnippet
+
+snippet esc_attr "Escape a string for safe use in an HTML attribute"
+esc_attr('${1:text}');
+endsnippet
+
+snippet esc_html "Escape HTML for safe output"
+esc_html('${1:text}');
+endsnippet
+
+snippet wp_kses_post "Allow only safe HTML tags in post content"
+wp_kses_post('${1:content}');
+endsnippet
+

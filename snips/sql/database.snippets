@@ -1,0 +1,36 @@
+snippet create_db
+CREATE DATABASE ${1}
+  CHARACTER SET ${2:utf8mb4}
+  COLLATE ${3:utf8mb4_unicode_ci};
+endsnippet
+
+snippet use_db
+USE ${1};
+endsnippet
+
+snippet create_table
+CREATE TABLE ${1} (
+  ${0}
+);
+endsnippet
+
+snippet id_primary_key
+id INT AUTO_INCREMENT PRIMARY KEY,
+endsnippet
+
+snippet varchar(255)
+VARCHAR(255)
+endsnippet
+
+snippet not_null
+NOT NULL
+endsnippet
+
+snippet text
+TEXT
+endsnippet
+
+snippet insert_into
+INSERT INTO ${1} (${2})
+VALUES (${3});
+endsnippet

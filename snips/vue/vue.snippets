@@ -1,29 +1,49 @@
-snippet form "simple form" b
-<form action="${1}" method="${2}">
-</form>
+extends "tailwind"
+
+snippet vtemp "Vue <template>" b
+<template>
+  ${1}
+</template>
 endsnippet
 
-snippet label
-<label for="${1}">${2}</label>
+snippet vsetup "Vue <script setup>" b
+<script setup>
+import { ref, computed, watch } from 'vue'
+
+${1}
+</script>
 endsnippet
 
-snippet input
-<input name="${1}" type="${2}">
+snippet vref "ref" b
+const ${1} = ref(${2})
 endsnippet
-extends javascript
 
-snippet html "HTML5 Boilerplate" b
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${1:Document}</title>
-</head>
-<body>
-    ${0}
-</body>
-</html>
+snippet vcomputed "computed" b
+const ${1} = computed(() => {
+  return ${2}
+})
+endsnippet
+
+snippet vwatch "watch" b
+watch(${1}, (newVal, oldVal) => {
+  ${2}
+})
+endsnippet
+
+snippet vfor "v-for" b
+<div v-for="(${1}, ${2}) in ${3}" :key="${2}">
+  ${4}
+</div>
+endsnippet
+
+snippet vif "v-if" b
+<div v-if="${1}">
+  ${2}
+</div>
+endsnippet
+
+snippet vmodel "v-model" b
+<input type="${1:text}" v-model="${2}" />
 endsnippet
 
 snippet flex-center "Tailwind: flex container & center all" b

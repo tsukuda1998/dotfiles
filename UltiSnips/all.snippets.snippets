@@ -1,29 +1,5 @@
-snippet form "simple form" b
-<form action="${1}" method="${2}">
-</form>
-endsnippet
-
-snippet label
-<label for="${1}">${2}</label>
-endsnippet
-
-snippet input
-<input name="${1}" type="${2}">
-endsnippet
-extends javascript
-
-snippet html "HTML5 Boilerplate" b
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${1:Document}</title>
-</head>
-<body>
-    ${0}
-</body>
-</html>
+snippet http_localhost
+http://localhost:
 endsnippet
 
 snippet flex-center "Tailwind: flex container & center all" b
@@ -42,7 +18,7 @@ snippet grid-col-3 "Tailwind: grid with 3 columns" b
 class="grid grid-cols-3 gap-4"
 endsnippet
 
-# --- Text & Font Size ---
+" --- Text & Font Size ---
 
 snippet text-xl "Tailwind: text-xl" b
 class="text-xl"
@@ -56,7 +32,7 @@ snippet text-custom "Tailwind: 任意のテキストサイズ (Arbitrary Value)"
 class="text-[$1px]"
 endsnippet
 
-# --- Font Weight ---
+" --- Font Weight ---
 
 snippet font-bold "Tailwind: font-bold" b
 class="font-bold"
@@ -66,7 +42,7 @@ snippet font-medium "Tailwind: font-medium" b
 class="font-medium"
 endsnippet
 
-# --- Colors ---
+" --- Colors ---
 
 snippet text-blue "Tailwind: text-blue-500" b
 class="text-blue-500"
@@ -84,7 +60,7 @@ snippet bg-gray "Tailwind: bg-gray-50" b
 class="bg-gray-50"
 endsnippet
 
-# --- Margin & Padding ---
+" --- Margin & Padding ---
 
 snippet m-4 "Tailwind: m-4 margin" b
 class="m-4"
@@ -102,7 +78,7 @@ snippet py-4 "Tailwind: py-4 vertical padding" b
 class="py-4"
 endsnippet
 
-# --- Hover ---
+" --- Hover ---
 
 snippet hover-shadow "Tailwind: hover:shadow-lg" b
 class="hover:shadow-lg"
@@ -112,7 +88,7 @@ snippet hover-bg "Tailwind: hover:bg-$1-500" b
 class="hover:bg-${1|blue,red,green,gray|}-500"
 endsnippet
 
-# --- Rounded & Border ---
+" --- Rounded & Border ---
 
 snippet rounded-md "Tailwind: rounded-md" b
 class="rounded-md"
@@ -126,7 +102,7 @@ snippet hover-border "Tailwind: hover:border-$1-500" b
 class="hover:border-${1|blue,red,green,gray|}-500"
 endsnippet
 
-# --- Shadows & Effects ---
+" --- Shadows & Effects ---
 
 snippet shadow "Tailwind: shadow-md" b
 class="shadow-md"

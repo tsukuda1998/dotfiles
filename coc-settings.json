@@ -1,6 +1,6 @@
 {
   "snippets.ultisnips.directories": [
-    "UltiSnips"
+    "~/.config/nvim/snips"
   ],
   "snippets.ultisnips.enable": true,
   "coc.preferences.snippetIndicator": "🐍",
@@ -12,6 +12,20 @@
   "html.format.indentInnerHtml": true,
   "html.format.indentHandlebars": true,
   "html.format.extraLiners": "",
-  "html.format.wrapLineLength": 0
+  "html.format.wrapLineLength": 0,
+  "snippets.textmateSnippets": {
+    "html": {
+      "scopes": {
+        "javascript": "<script>"
+      }
+    }
+  },
+  "snippets.priority": ["html", "javascript"],
+
+    "tailwindCSS.includeLanguages": {
+    "vue": "html",
+    "vue-html": "html"
+  },
+  "tailwindCSS.emmetCompletions": true
 }
 

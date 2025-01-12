@@ -9,10 +9,16 @@ Plug 'neoclide/coc-snippets'
 Plug 'sbdchd/neoformat'                        
 Plug 'vim-airline/vim-airline'                 
 Plug 'SirVer/ultisnips'                        
+Plug 'StanAngeloff/php.vim'
+
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'iamcco/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
 command! E Explore
+command! T NvimTreeToggle
 
 set number
 set autoread
@@ -22,13 +28,41 @@ set shiftwidth=2
 set softtabstop=2
 set whichwrap=h,l,b,s,<,>,[,]
 set textwidth=0
+set termguicolors
+set nowrap
 
-filetype plugin indent on
-set autoindent
-set smartindent
 
+syntax on
+colorscheme industry
 
 nnoremap <Return><Return> <c-w><c-w>      
+nnoremap <M-v> <C-v>
+nnoremap <C-h> 10zh
+nnoremap <C-l> 10zl
+
+nnoremap <C-j> 4<C-e>
+nnoremap <C-k> 4<C-y>
+nnoremap <leader>e :NvimTreeToggle<CR>
+
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+
+
+lua <<EOF
+require('nvim-tree').setup({
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  }
+})
+EOF
+
+" augroup NvimTreeAutoOpen
+"   autocmd!
+"   autocmd VimEnter * if argc() > 0 | NvimTreeOpen | NvimTreeFindFile | endif
+" augroup END
+
 highlight trailingWhitespace ctermbg=red guibg=red  
 cnoremap <Up> <C-p>                        
 cnoremap <Down> <C-n>                      
@@ -40,8 +74,10 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-phpls',
       \ 'coc-sql',
-      \ 'coc-ultisnips'
+      \ 'coc-ultisnips',
+      \ 'coc-tailwindcss'
       \ ]
+
 let g:UltiSnipsRemoveSelectModeMappings = 1
 let g:UltiSnipsRemoveSplitMappings = 1
 
@@ -49,21 +85,6 @@ let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
-" nnoremap > v>
-" nnoremap < v<
-" vnoremap > >gv
-" vnoremap < <gv
-
-" inoremap <silent><expr> <S-j>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets.expandOrJump', ''])\<CR>" :
-"       \ "\<S-j>"
-
-" inoremap <silent><expr> <S-k>
-"       \ pumvisible() ? "\<C-p>" :
-"       \ coc#jumpable(-1) ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets.jumpBackward', ''])\<CR>" :
-"       \ "\<S-k>"
-
-
 inoremap <silent><expr> <CR> pumvisible() ? coc#pum#confirm() : "\<CR>"
 
+set runtimepath+=~/.config/nvim/after
